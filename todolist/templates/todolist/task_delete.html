@@ -1,0 +1,14 @@
+{% extends 'todolist/base.html' %}
+
+{% block header %}
+    <h1>Delete task "{{task}}"</h1>
+{% endblock header %}
+
+{% block content %}
+    <p>Are you sure you want to delete "{{task}}"?</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <a class="btn btn-outline-secondary" href="{% url 'tasks' %}" role="button">Go back</a>
+        <input class="btn btn-danger" type="submit" value="Delete">
+    </form>
+{% endblock content %}

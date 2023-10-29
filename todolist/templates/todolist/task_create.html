@@ -1,0 +1,14 @@
+{% extends 'todolist/base.html' %}
+
+{% block header %}
+    <h1>Add a new task</h1>
+    {% endblock header %}
+    
+    {% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <a class="btn btn-outline-secondary" href="{% url 'tasks' %}">Go back</a>
+        <input class="btn btn-primary" type="submit" value="Add">
+    </form>
+{% endblock content %}
