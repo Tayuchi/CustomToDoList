@@ -2,9 +2,9 @@
 
 {% block header %}
     <h1>Edit task "{{task}}"</h1>
-    {% endblock header %}
+{% endblock header %}
     
-    {% block content %}
+{% block content %}
     <form method="POST" action="">
         {% csrf_token %}
         {{form.as_p}}
