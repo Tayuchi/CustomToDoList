@@ -13,12 +13,13 @@
     <div>
         {% if request.user.is_authenticated %}
         <h1>{{user|title}}'s To Do List</h1>
+        <a class="btn btn-primary" href="{% url 'task-create' %}">Add Task</a>
         
         {% else %}
-        <h1>Anonymous's To Do List</h1>
+        <h1>Anonymous user's To Do List</h1>
+        <a class="btn btn-primary" href="{% url 'login' %}">Add Task</a>
 
         {% endif %}
-        <a class="btn btn-primary" href="{% url 'task-create' %}">Add Task</a>
     </div>
 {% endblock header %}
 
@@ -33,7 +34,10 @@
             <tbody>
                 {% for task in tasks %}
                 <tr>
-                    <td>{{task.title}}</td>
+                    <td class="task-title" id="task-{{ task.id }}" style="cursor: pointer;">
+                        {{task.title}}
+                    </td>
+
                     <td>
                         <a href="{% url 'task-edit' task.id %}" class="btn btn-outline-secondary btn-sm">Edit</a>
                         <a href="{% url 'task-delete' task.id %}" class="btn btn-danger btn-sm">Delete</a>
@@ -45,4 +49,19 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        const taskElements = document.querySelectorAll('.task-title');
+        taskElements.forEach(taskElement => {
+            taskElement.addEventListener('click', () => {
+                taskElement.classList.toggle('completed');
+            });
+        });
+    </script>
+
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
 {% endblock content %}

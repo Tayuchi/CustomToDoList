@@ -8,11 +8,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
 from .models import Task
+from .forms import CustomUserCreationForm
+
 # Create your views here.
 
-class RegisterPage(FormView):
+class RegisterView(FormView):
     template_name = 'todolist/auth_register.html'
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('tasks')
 
@@ -20,12 +22,12 @@ class RegisterPage(FormView):
         user = form.save()
         if user is not None:
             login(self.request, user)
-        return super(RegisterPage, self).form_valid(form)
+        return super(RegisterView, self).form_valid(form)
     
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('tasks')
-        return super(RegisterPage, self).get(*args, **kwargs)
+        return super(RegisterView, self).get(*args, **kwargs)
 
 class CustomLoginView(LoginView):
     template_name = 'todolist/auth_login.html'
@@ -35,7 +37,7 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('tasks')
 
-class TaskList(ListView, LoginRequiredMixin):
+class TaskList(ListView):
     model = Task
     template_name = 'todolist/task_list.html'
     context_object_name = 'tasks'
@@ -46,7 +48,7 @@ class TaskList(ListView, LoginRequiredMixin):
         else:
             return Task.objects.none()
 
-class TaskCreate(CreateView, LoginRequiredMixin):
+class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     template_name = 'todolist/task_create.html'
     fields = ['title']
@@ -56,13 +58,13 @@ class TaskCreate(CreateView, LoginRequiredMixin):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
 
-class TaskEdit(UpdateView, LoginRequiredMixin):
+class TaskEdit(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = 'todolist/task_edit.html'
     fields = ['title']
     success_url = reverse_lazy('tasks')
 
-class TaskDelete(DeleteView, LoginRequiredMixin):
+class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'todolist/task_delete.html'
     success_url = reverse_lazy('tasks')
