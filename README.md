@@ -22,7 +22,7 @@ cd CustomToDoList/
 ```
 python -m venv myenv
 ```
-windowsの場合
+windows
 ```
 myenv\Scripts\activate
 ```
@@ -32,7 +32,7 @@ pip install Django~=4.2.6
 ```
 python manage.py runserver
 ```
-macの場合
+mac os
 ```
 source myenv\bin\activate
 ```
