@@ -30,6 +30,7 @@ macの場合
 ```
 source myenv\bin\activate
 ```
+
 ```
 pip install Django~=4.2.6
 ```
