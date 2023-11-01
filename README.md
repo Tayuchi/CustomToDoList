@@ -26,11 +26,16 @@ windowsの場合
 ```
 myenv\Scripts\activate
 ```
+```
+pip install Django~=4.2.6
+```
+```
+python manage.py runserver
+```
 macの場合
 ```
 source myenv\bin\activate
 ```
-
 ```
 pip install Django~=4.2.6
 ```
