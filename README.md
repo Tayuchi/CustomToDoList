@@ -14,7 +14,7 @@ Django~=4.2.6
 
 
 # Installation
-install the application on an environment where python3 is installed.
+Please install the application on an environment where python3 is installed.
 
 以下pythonのある環境で実行してください。
 ```
