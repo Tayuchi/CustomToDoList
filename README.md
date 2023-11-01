@@ -1,5 +1,5 @@
 # CustomToDoList
-A todo list with user verification system using Django(4.2.6)
+A todo list with user verification using Django(4.2.6)
 
 Djangoを使用したアカウント登録機能付きのtodoリストです。
 
